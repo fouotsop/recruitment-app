@@ -2,16 +2,16 @@ package com.recruitment_optimizer.candidateevaluation.lib.ahp;
 
 import java.util.List;
 
-import com.recruitment_optimizer.candidateevaluation.model.Criterion;
+import com.recruitment_optimizer.candidateevaluation.model.RecruitmentCriterion;
 
 public class PairwiseComparer {
 
-    private final List<Criterion> criteria;
+    private final List<RecruitmentCriterion> recruitmentCriteria;
 
     private double[][] pairwiseComparismMatrix;
 
-    public PairwiseComparer(List<Criterion> criteria) {
-        this.criteria = criteria;
+    public PairwiseComparer(List<RecruitmentCriterion> criteria) {
+        this.recruitmentCriteria = criteria;
     }
 
     public double[][] getPairwiseComparismMatrix() {
@@ -19,12 +19,12 @@ public class PairwiseComparer {
     }
 
     public void generatePairwiseComparismMatrix() {
-        int n = criteria.size();
+        int n = recruitmentCriteria.size();
         pairwiseComparismMatrix = new double[n][n];
         for (int i = 0; i < n; i++) {
             pairwiseComparismMatrix[i][i] = 1;
             for (int j = i + 1; j < n; j++) {
-                double comparism = criteria.get(i).getPreference() / criteria.get(j).getPreference();
+                double comparism = recruitmentCriteria.get(i).getPreference() / recruitmentCriteria.get(j).getPreference();
                 pairwiseComparismMatrix[i][j] = comparism;
                 pairwiseComparismMatrix[j][i] = 1 / comparism;
             }

@@ -1,37 +1,33 @@
 package com.recruitment_optimizer.candidateevaluation.model;
 
+import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.OneToMany;
+
+@Inheritance(strategy = InheritanceType.JOINED)
+@Entity
 public abstract class Criterion {
+
+    private String id;
 
     private String name;
 
-    private double preference;
-
-    private Double weight;
+    private String description;
 
     private boolean mandatory;
 
-    public Criterion(String name, double preference) {
-        this.name = name;
-        this.preference = preference;
-    }
+    private List<RecruitmentCriterion> recruitmentCriteria;
 
+    public Criterion() {}
+
+    @Column(nullable = false)
     public String getName() {
         return name;
-    }
-
-    public double getPreference() {
-        return preference;
-    }
-
-    public abstract String getType();
-
-    public Double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Double weight) {
-        this.weight = weight;
     }
 
     public void setMandatory(boolean mandatory) {
@@ -42,5 +38,37 @@ public abstract class Criterion {
         return mandatory;
     }
 
+
+    @Id
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Column(columnDefinition = "TEXT")
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @OneToMany(mappedBy = "criterion")
+    public List<RecruitmentCriterion> getRecruitmentCriteria() {
+        return recruitmentCriteria;
+    }
+
+    public void setRecruitmentCriteria(List<RecruitmentCriterion> recruitmentCriteria) {
+        this.recruitmentCriteria = recruitmentCriteria;
+    }
     
+
 }

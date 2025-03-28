@@ -16,6 +16,11 @@ public class CategoricalCriterion extends Criterion {
 
     public CategoricalCriterion() {}    
 
+    public CategoricalCriterion(String id, String name, String description, boolean mandatory,List<LabeledValue> labeledValues) {
+        super(id, name, description, mandatory);
+        this.labeledValues = labeledValues;
+    }
+
     @Override
     @Id
     public String getId() {

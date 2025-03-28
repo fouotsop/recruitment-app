@@ -14,4 +14,5 @@ public interface CriterionService {
     public Criterion update(Criterion criterion);
 
     public Page<Criterion> findAll(Pageable pageable);
+
 }

@@ -12,6 +12,12 @@ public class NumericCriterion extends Criterion {
 
     public NumericCriterion() {}
 
+    public NumericCriterion(String id, String name, String description, boolean mandatory, Double minValue, Double maxValue) {
+        super(id, name, description, mandatory);
+        this.minValue = minValue;
+        this.maxValue = maxValue;
+    }
+
     @Override
     @Id
     public String getId() {

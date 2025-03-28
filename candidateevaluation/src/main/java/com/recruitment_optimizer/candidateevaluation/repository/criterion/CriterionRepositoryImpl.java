@@ -27,5 +27,5 @@ public class CriterionRepositoryImpl implements CriterionRepository {
     public Page<Criterion> findAll(Pageable pageable) {
         return criterionJpaRepository.findAll(pageable);
     }
-    
+
 }

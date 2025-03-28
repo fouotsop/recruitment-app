@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.recruitment_optimizer.candidateevaluation.model.Criterion;
 
 public interface CriterionJpaRepository extends JpaRepository<Criterion, String> {  
-    
+
 }

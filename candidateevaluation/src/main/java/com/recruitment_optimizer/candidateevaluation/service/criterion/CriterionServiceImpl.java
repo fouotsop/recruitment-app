@@ -33,5 +33,4 @@ public class CriterionServiceImpl implements CriterionService {
     }
 
 
-    
 }

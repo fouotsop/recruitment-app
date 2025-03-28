@@ -2,6 +2,8 @@ package com.recruitment_optimizer.candidateevaluation.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -24,6 +26,13 @@ public abstract class Criterion {
     private List<RecruitmentCriterion> recruitmentCriteria;
 
     public Criterion() {}
+
+    public Criterion(String id, String name, String description, boolean mandatory) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.mandatory = mandatory;
+    }
 
     @Column(nullable = false)
     public String getName() {
@@ -61,6 +70,7 @@ public abstract class Criterion {
         this.description = description;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "criterion")
     public List<RecruitmentCriterion> getRecruitmentCriteria() {
         return recruitmentCriteria;

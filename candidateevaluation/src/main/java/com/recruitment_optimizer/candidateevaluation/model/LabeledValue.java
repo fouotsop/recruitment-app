@@ -19,6 +19,8 @@ public class LabeledValue {
 
     private CategoricalCriterion categoricalCriterion;
     
+    public LabeledValue () {}
+
     public LabeledValue(String label, double value) {
         this.label = label;
         this.value = value;

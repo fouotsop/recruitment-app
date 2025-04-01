@@ -1,4 +1,4 @@
-package com.recruitment_optimizer.candidateevaluation.dto;
+package com.recruitment_optimizer.candidateevaluation.dto.model;
 
 import java.util.List;
 

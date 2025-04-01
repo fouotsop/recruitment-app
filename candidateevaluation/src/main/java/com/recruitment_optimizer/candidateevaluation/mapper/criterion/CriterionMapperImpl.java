@@ -2,9 +2,9 @@ package com.recruitment_optimizer.candidateevaluation.mapper.criterion;
 
 import org.springframework.stereotype.Component;
 
-import com.recruitment_optimizer.candidateevaluation.dto.CategoricalCriterionDto;
-import com.recruitment_optimizer.candidateevaluation.dto.CriterionDto;
-import com.recruitment_optimizer.candidateevaluation.dto.NumericCriterionDto;
+import com.recruitment_optimizer.candidateevaluation.dto.model.CategoricalCriterionDto;
+import com.recruitment_optimizer.candidateevaluation.dto.model.CriterionDto;
+import com.recruitment_optimizer.candidateevaluation.dto.model.NumericCriterionDto;
 import com.recruitment_optimizer.candidateevaluation.model.CategoricalCriterion;
 import com.recruitment_optimizer.candidateevaluation.model.NumericCriterion;
 

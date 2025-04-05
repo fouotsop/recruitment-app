@@ -18,7 +18,7 @@ public class PairwiseComparer {
         return pairwiseComparismMatrix;
     }
 
-    public void generatePairwiseComparismMatrix() {
+    public void generatePairwiseComparisonMatrix() {
         int n = recruitmentCriteria.size();
         pairwiseComparismMatrix = new double[n][n];
         for (int i = 0; i < n; i++) {

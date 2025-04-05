@@ -26,6 +26,7 @@ public class RecruitmentServiceImpl implements RecruitmentService {
 
     @Override
     public Recruitment update(Recruitment recruitment) {
+
         return recruitmentRepository.save(recruitment);
     }
 

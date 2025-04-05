@@ -1,19 +1,14 @@
-package com.recruitment_optimizer.candidateevaluation.model;
+package com.recruitment_optimizer.candidateevaluation.dto.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.recruitment_optimizer.candidateevaluation.model.RecruitmentCriterion;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 
-@Entity
-public class Recruitment {
-
-    private String id;
+public class RecruitmentDto {
+    
+   private String id;
 
     private String title;
 
@@ -29,11 +24,8 @@ public class Recruitment {
 
     private List<RecruitmentCriterion> recruitmentCriteria;
 
-    private List<Application> applications;
+    public RecruitmentDto () {}
 
-    public Recruitment () {}
-
-    @Id
     public String getId() {
         return id;
     }
@@ -51,7 +43,6 @@ public class Recruitment {
         this.title = title;
     }
 
-    @Column(columnDefinition = "TEXT", nullable = false)
     public String getDescription() {
         return description;
     }
@@ -93,8 +84,6 @@ public class Recruitment {
     }
 
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "recruitment", cascade = CascadeType.ALL)
     public List<RecruitmentCriterion> getRecruitmentCriteria() {
         return recruitmentCriteria;
     }
@@ -103,19 +92,4 @@ public class Recruitment {
         this.recruitmentCriteria = recruitmentCriterions;
     }
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "recruitment")
-    public List<Application> getApplications() {
-        return applications;
-    }
-
-    public void setApplications(List<Application> applications) {
-        this.applications = applications;
-    }
-
-
-    
-
-
-    
 }

@@ -1,0 +1,30 @@
+name: Build and Deploy Monity Work Account service
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+
+    build:
+        name: Build and deploy 3mcdigital
+        runs-on: ubuntu-22.04
+        steps:
+            - name: checkout the repository
+              uses: actions/checkout@v2
+
+            - name: Build the docker images
+              run: docker compose -f docker-compose.yml build
+
+            - name: Login to Docker hub
+              env:
+                  username: ${{ secrets.DOCKER_HUB_USERNAME }}
+                  password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+              run: docker login -u $username -p $password
+
+            - name: Push images to docker hub
+              run: docker compose push
+
+
+            

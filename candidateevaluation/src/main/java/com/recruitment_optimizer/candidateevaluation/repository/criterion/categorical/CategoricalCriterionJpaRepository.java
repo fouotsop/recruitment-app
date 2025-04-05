@@ -9,7 +9,7 @@ import com.recruitment_optimizer.candidateevaluation.model.CategoricalCriterion;
 public interface CategoricalCriterionJpaRepository extends JpaRepository<CategoricalCriterion, String> {
 
     @EntityGraph(attributePaths = {"labeledValues"})
-    @Query(value = "SELECT c FROM CategoricalCriterion c WHERE ID = ?1")
+    @Query(value = "SELECT c FROM CategoricalCriterion c WHERE c.id = ?1")
     CategoricalCriterion fetchById(String id);
     
 }

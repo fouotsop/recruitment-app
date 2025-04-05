@@ -4,7 +4,7 @@ services:
   evaluation-service-db:
     hostname: evaluation-service-db
     restart: always
-    image: patrickfosso49/recruitment-app:account-service-db
+    image: fouotsop/recruitment-app:account-service-db
     build:
       context: ./candidateevaluation/database/
     
@@ -12,6 +12,6 @@ services:
   evaluation-service:
     hostname: evaluation-service
     restart: always
-    image: patrickfosso49/recruitment-app:account-service
+    image: fouotsop/recruitment-app:account-service
     build: 
       context: ./candidateevaluation/

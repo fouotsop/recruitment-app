@@ -14,7 +14,6 @@ RUN ./mvnw install -DskipTests
 
 RUN ls -l target
 
-ENV DB_URL="jdbc:mysql://localhost:3306/candidate_evaluation_db"
 
 RUN mv target/*.jar app.jar
 

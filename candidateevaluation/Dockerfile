@@ -12,6 +12,8 @@ COPY src src
 
 RUN ./mvnw install -DskipTests
 
+EXPOSE 8080
+
 RUN ls -l target
 
 

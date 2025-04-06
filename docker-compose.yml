@@ -1,0 +1,9 @@
+services:
+
+# ACCOUNT SERVICE
+  evaluation-service:
+    hostname: evaluation-service
+    restart: always
+    image: fouotsop/recruitment-app:account-service
+    build: 
+      context: ./candidateevaluation/

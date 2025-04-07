@@ -21,6 +21,7 @@ import com.recruitment_optimizer.candidateevaluation.model.Criterion;
 import com.recruitment_optimizer.candidateevaluation.model.LabeledValue;
 import com.recruitment_optimizer.candidateevaluation.model.NumericCriterion;
 import com.recruitment_optimizer.candidateevaluation.service.criterion.CriterionService;
+import com.recruitment_optimizer.candidateevaluation.service.criterion.categorical.CategoricalCriterionService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -34,9 +35,11 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class CriterionController {
     
     private final CriterionService criterionService;
+    private final CategoricalCriterionService categoricalCriterionService;
 
 
-    public CriterionController(CriterionService criterionService) {
+    public CriterionController(CriterionService criterionService, CategoricalCriterionService categoricalCriterionService) {
+        this.categoricalCriterionService = categoricalCriterionService;
         this.criterionService = criterionService;
     }
 
@@ -50,14 +53,24 @@ public class CriterionController {
         @RequestParam double[] values
     ) {
 
+        String criterionId = UUID.randomUUID().toString();
+
         List<LabeledValue> labeledValues = new ArrayList<>();
         for (int i = 0; i < labels.length; i++) {
             labeledValues.add(new LabeledValue(labels[i], values[i]));
+            labeledValues.get(i).setId(UUID.randomUUID().toString());
+            labeledValues.get(i).setCategoricalCriterion(new CategoricalCriterion());
         }
 
-        Criterion criterion = new CategoricalCriterion(UUID.randomUUID().toString(), name, description, mandatory, labeledValues);
+        Criterion criterion = new CategoricalCriterion(criterionId, name, description, mandatory, null);
 
         criterionService.create(criterion);
+
+        for (LabeledValue labeledValue : labeledValues) {
+            labeledValue.setCategoricalCriterion(new CategoricalCriterion());
+            labeledValue.getCategoricalCriterion().setId(criterion.getId());
+            categoricalCriterionService.addLabeledValue(labeledValue);
+        }
         
         final String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/criteria/{id}").buildAndExpand(criterion.getId()).toUriString();
         URI location = URI.create(url);
@@ -79,6 +92,7 @@ public class CriterionController {
         Criterion criterion = new NumericCriterion(UUID.randomUUID().toString(), name, description, mandatory, min, max);
 
         final String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/criteria/{id}").buildAndExpand(criterion.getId()).toUriString();
+        criterion = criterionService.create(criterion);
         URI location = URI.create(url);
         return ResponseEntity.created(location).body(criterion);
     }

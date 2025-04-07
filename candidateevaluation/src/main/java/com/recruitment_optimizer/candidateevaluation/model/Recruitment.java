@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -94,7 +93,7 @@ public class Recruitment {
 
 
     @JsonIgnore
-    @OneToMany(mappedBy = "recruitment", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "recruitment")
     public List<RecruitmentCriterion> getRecruitmentCriteria() {
         return recruitmentCriteria;
     }

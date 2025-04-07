@@ -1,5 +1,7 @@
 package com.recruitment_optimizer.candidateevaluation.controller;
 
+import java.util.UUID;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -39,10 +41,22 @@ public class RecruitmentController {
     @PostMapping("")
     public ResponseEntity<Recruitment> create(@RequestBody RecruitmentDto recruitment) {
         
-        Recruitment createdRecruitment = new Recruitment();
-        createdRecruitment.setTitle(recruitment.getTitle());
+        String id = UUID.randomUUID().toString();
 
-        return null;
+        Recruitment created = new Recruitment();
+        created.setId(id);
+        created.setTitle(recruitment.getTitle());
+        created.setDescription(recruitment.getDescription());
+        created.setAvailable(false);
+        created.setNumberOfPosts(recruitment.getNumberOfPosts());
+        created.setLocation(recruitment.getLocation());
+        created.setSalary(recruitment.getSalary());
+        created.setRecruitmentCriteria(recruitment.getRecruitmentCriteria());
+
+        created = service.create(created);
+
+
+        return ResponseEntity.ok().body(created);
     }
 
 

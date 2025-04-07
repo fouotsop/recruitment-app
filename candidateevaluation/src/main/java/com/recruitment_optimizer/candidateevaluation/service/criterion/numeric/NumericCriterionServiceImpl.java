@@ -2,6 +2,7 @@ package com.recruitment_optimizer.candidateevaluation.service.criterion.numeric;
 
 import org.springframework.stereotype.Service;
 
+import com.recruitment_optimizer.candidateevaluation.dto.model.CriterionDto;
 import com.recruitment_optimizer.candidateevaluation.dto.model.NumericCriterionDto;
 import com.recruitment_optimizer.candidateevaluation.mapper.criterion.CriterionMapper;
 import com.recruitment_optimizer.candidateevaluation.model.NumericCriterion;
@@ -39,6 +40,20 @@ public class NumericCriterionServiceImpl implements NumericCriterionService {
         existing = this.numericCriterionRepository.save(existing); 
 
         return existing;
+    }
+
+    @Override
+    public CriterionDto fetchById(String id) {
+
+        NumericCriterion criterion = this.numericCriterionRepository.findById(id);
+
+        if (criterion == null) {
+            return null;
+        }
+
+        CriterionDto dto = this.mapper.toDto(criterion);
+
+        return dto;
     }
     
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -28,7 +29,7 @@ public class CategoricalCriterion extends Criterion {
     }
 
     @JsonIgnore
-    @OneToMany(mappedBy = "categoricalCriterion")
+    @OneToMany(mappedBy = "categoricalCriterion", cascade = CascadeType.ALL)
     public List<LabeledValue> getLabeledValues() {
         return labeledValues;
     }

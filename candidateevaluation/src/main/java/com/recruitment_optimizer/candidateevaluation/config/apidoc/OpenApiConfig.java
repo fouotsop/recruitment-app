@@ -34,10 +34,10 @@ public class OpenApiConfig {
 
         final String devFullUrl = devUrl + serverContext;
 
-        final String deployUrl = "https://recruitment-app-1-4njw.onrender.com/swagger-ui/index.html";
+        final String deployUrl = "https://recruitment-app-1-4njw.onrender.com";
 
         Server devServer = new Server();
-        devServer.setUrl(devFullUrl);
+        devServer.setUrl(deployUrl);
         devServer.setDescription("Server url for development environment");
 
 

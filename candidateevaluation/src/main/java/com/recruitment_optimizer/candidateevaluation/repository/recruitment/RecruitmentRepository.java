@@ -15,5 +15,7 @@ public interface RecruitmentRepository {
 
     public Page<Recruitment> findAll(Pageable pageable);
 
+    public Recruitment fetcchById(String id);
+
 
 }

@@ -31,5 +31,18 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
     }
 
 
+    @Override
+    public Recruitment fetcchById(String id) {
+
+        Recruitment recruitment = this.recruitmentJpaRepository.fetchById(id);
+
+        if (recruitment == null) {
+            throw new RuntimeException("Recruitment not found");
+        }
+
+        return recruitment;
+    }
+
+
 
 }

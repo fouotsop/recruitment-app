@@ -65,8 +65,9 @@ public class RecruitmentController {
     public ResponseEntity<RecruitmentDto> fetchById(@PathVariable("id") String id) {
 
 
+        RecruitmentDto recruitment = service.fetchById(id);
 
-        return null;
+        return ResponseEntity.ok().body(recruitment);
     }
     
     @Operation(summary = "Update recruitment by ID", description = "Update recruitment details by ID")

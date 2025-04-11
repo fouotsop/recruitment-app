@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.recruitment_optimizer.candidateevaluation.dto.model.RecruitmentDto;
+import com.recruitment_optimizer.candidateevaluation.mapper.recruitment.RecruitmentMapper;
 import com.recruitment_optimizer.candidateevaluation.model.Criterion;
 import com.recruitment_optimizer.candidateevaluation.model.Recruitment;
 import com.recruitment_optimizer.candidateevaluation.model.RecruitmentCriterion;
@@ -22,11 +24,13 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     private final RecruitmentRepository recruitmentRepository;
     private final RecruitmentCriterionRepository recruitmentCriterionRepository;
     private final CriterionRepository criterionRepository;
+    private final RecruitmentMapper recruitmentMapper;
 
-    public RecruitmentServiceImpl(RecruitmentRepository recruitmentRepository, RecruitmentCriterionRepository recruitmentCriterionRepository, CriterionRepository criterionRepository) {
+    public RecruitmentServiceImpl(RecruitmentMapper mapper, RecruitmentRepository recruitmentRepository, RecruitmentCriterionRepository recruitmentCriterionRepository, CriterionRepository criterionRepository) {
         this.criterionRepository = criterionRepository;
         this.recruitmentCriterionRepository = recruitmentCriterionRepository;
         this.recruitmentRepository = recruitmentRepository;
+        this.recruitmentMapper = mapper;
     }
 
     @Override
@@ -68,6 +72,16 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     @Override
     public Recruitment findById(String id) {
         return recruitmentRepository.findById(id);
+    }
+
+    @Override
+    public RecruitmentDto fetchById(String id) {
+
+        Recruitment recruitment = recruitmentRepository.fetcchById(id);
+
+        RecruitmentDto recruitmentDto = recruitmentMapper.toDto(recruitment);
+
+        return recruitmentDto;
     }
 
 

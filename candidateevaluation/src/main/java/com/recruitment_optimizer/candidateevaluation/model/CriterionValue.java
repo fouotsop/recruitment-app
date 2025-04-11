@@ -6,11 +6,12 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 
 @Entity
-public class AppliclationCriterionValue {
+public class CriterionValue {
 
-    private CompositeId id;
+    private TenaryId id;
 
     private double value;
 
@@ -18,14 +19,14 @@ public class AppliclationCriterionValue {
 
     private Criterion criterion;
 
-    public AppliclationCriterionValue() {}
+    public CriterionValue() {}
 
     @EmbeddedId
-    public CompositeId getId() {
+    public TenaryId getId() {
         return id;
     }
 
-    public void setId(CompositeId id) {
+    public void setId(TenaryId id) {
         this.id = id;
     }
 
@@ -38,6 +39,7 @@ public class AppliclationCriterionValue {
     }
 
     @JsonIgnore
+    @MapsId("childId")
     @ManyToOne(fetch = FetchType.LAZY)
     public Application getApplication() {
         return application;
@@ -48,6 +50,7 @@ public class AppliclationCriterionValue {
     }
 
     @JsonIgnore
+    @MapsId("parentId")
     @ManyToOne(fetch = FetchType.LAZY)
     public Criterion getCriterion() {
         return criterion;

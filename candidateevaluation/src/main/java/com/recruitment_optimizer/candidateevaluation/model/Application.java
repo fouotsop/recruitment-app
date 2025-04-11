@@ -1,12 +1,16 @@
 package com.recruitment_optimizer.candidateevaluation.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Application {
@@ -19,6 +23,7 @@ public class Application {
 
     private Recruitment recruitment;
 
+    private List<CriterionValue> criteriaValues;
 
     public Application () {}
 
@@ -59,6 +64,15 @@ public class Application {
 
     public void setRecruitment(Recruitment recruitment) {
         this.recruitment = recruitment;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<CriterionValue> getCriteriaValues() {
+        return criteriaValues;
+    }
+
+    public void setCriteriaValues(List<CriterionValue> applicationCriterionValue) {
+        this.criteriaValues = applicationCriterionValue;
     }
 
 

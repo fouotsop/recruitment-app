@@ -5,6 +5,7 @@ import numpy as np
 import random
 from typing import List, Dict, Callable, Tuple
 from collections import OrderedDict
+from sklearn.cluster import KMeans
 
 app = Flask(__name__)
 
@@ -62,9 +63,26 @@ def genetic_algorithm(
     elitism_count: int = 2
 ) -> Tuple[List[int], List[float]]:
     
+     #preparation de Kmeans
+    features = np.array([[c['education'], c['skills'], c['experience']] for c in candidates])
+    max_clusters = min(population_size // num_to_select, len(candidates))
+    kmeans = KMeans(n_clusters=max_clusters, random_state=42)
+    # kmeans = KMeans(n_clusters=population_size // num_to_select, random_state=42)
+    kmeans.fit(features)
+    labels = kmeans.labels_
+
     def initialize():
-        return [random.sample(range(len(candidates)), num_to_select) 
-                for _ in range(population_size)]
+        population = []
+        for cluster in range(kmeans.n_clusters):
+            cluster_indices = np.where(labels == cluster)[0]
+            selected = random.sample(cluster_indices.tolist(), min(num_to_select, len(cluster_indices)))
+            population.append(selected)
+        return population
+
+    
+    # def initialize():
+    #     return [random.sample(range(len(candidates)), num_to_select) 
+    #             for _ in range(population_size)]
 
     def select(population, fitnesses):
         tournament = random.sample(range(len(population)), 5)
@@ -161,7 +179,8 @@ def optimize():
             num_to_select=num_to_select,
             constraint_funcs=constraint_funcs,
             constraint_params=constraint_params,
-            population_size=int(data.get('population_size', 100)),
+            # population_size=int(data.get('population_size', 100)),
+            population_size=len(candidates),
             generations=int(data.get('generations', 100)),
             crossover_rate=float(data.get('crossover_rate', 0.85)),
             mutation_rate=float(data.get('mutation_rate', 0.15)),

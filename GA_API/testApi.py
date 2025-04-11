@@ -28,8 +28,7 @@ test_data = {
     "min_education": 4
 }
 
-response = requests.post('http://localhost:5000/optimize', 
-                        json=test_data)
+response = requests.post('http://localhost:5000/optimize', json=test_data)
 
 print("Status Code:", response.status_code)
 print("Response:")

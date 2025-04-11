@@ -6,6 +6,8 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
@@ -20,7 +22,9 @@ public class Candidate {
 
     private String phone;
 
-    private String sex;
+    private Genre genre;
+
+    private String location;
 
     private LocalDate dateOfBirth;
 
@@ -59,14 +63,6 @@ public class Candidate {
         this.phone = phone;
     }
 
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
@@ -85,4 +81,22 @@ public class Candidate {
         this.applications = applications;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    @Enumerated(EnumType.STRING)
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    
 }

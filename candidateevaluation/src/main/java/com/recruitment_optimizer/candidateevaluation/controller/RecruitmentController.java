@@ -1,5 +1,6 @@
 package com.recruitment_optimizer.candidateevaluation.controller;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.recruitment_optimizer.candidateevaluation.dto.model.RecruitmentDto;
 import com.recruitment_optimizer.candidateevaluation.model.Recruitment;
+import com.recruitment_optimizer.candidateevaluation.model.RecruitmentCriterion;
 import com.recruitment_optimizer.candidateevaluation.service.recruitment.RecruitmentService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -92,4 +94,12 @@ public class RecruitmentController {
         return ResponseEntity.ok().body(results);
     }
     
+
+    @Operation(summary = "Add a criterion to a recruitment", description = "Add a criterion to a recruitment")  
+    @PostMapping("/{id}/criteria")
+    public ResponseEntity<?> addCriterion(@PathVariable String id, @RequestBody List<RecruitmentCriterion> criteria) {
+        Recruitment recruitment = service.addCriterion(id, criteria);
+        return ResponseEntity.ok().body(recruitment);
+    }
+
 }

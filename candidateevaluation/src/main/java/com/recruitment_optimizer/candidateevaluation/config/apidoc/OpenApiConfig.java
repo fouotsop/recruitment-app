@@ -37,7 +37,7 @@ public class OpenApiConfig {
         final String deployUrl = "https://recruitment-app-1-4njw.onrender.com";
 
         Server devServer = new Server();
-        devServer.setUrl(deployUrl);
+        devServer.setUrl(devFullUrl);
         devServer.setDescription("Server url for development environment");
 
 

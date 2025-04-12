@@ -84,5 +84,23 @@ public class RecruitmentServiceImpl implements RecruitmentService {
         return recruitmentDto;
     }
 
+    @Override
+    @Transactional
+    public Recruitment addCriterion(String id, List<RecruitmentCriterion> criteria) {
+
+        Recruitment recruitment = recruitmentRepository.findById(id);
+
+        for (RecruitmentCriterion recruitmentCriterion : criteria) {
+            Criterion criterion = criterionRepository.findById(recruitmentCriterion.getId().getParentId());
+            recruitmentCriterion.setCriterion(criterion);
+            recruitmentCriterion.setRecruitment(recruitment);
+            recruitmentCriterionRepository.save(recruitmentCriterion);
+        }
+
+        recruitment.getRecruitmentCriteria().addAll(criteria);
+
+        return recruitment;
+
+    }
 
 }

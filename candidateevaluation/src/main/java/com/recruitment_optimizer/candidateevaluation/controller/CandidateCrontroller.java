@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.recruitment_optimizer.candidateevaluation.dto.request.Login;
 import com.recruitment_optimizer.candidateevaluation.model.Candidate;
 import com.recruitment_optimizer.candidateevaluation.service.candidate.CandidateService;
 
@@ -44,6 +45,14 @@ public class CandidateCrontroller {
 
         return ResponseEntity.ok().body(candidate);
 
+    }
+
+    @Operation(summary = "Login with candidate email and password", description = "Retrieve a candidate's details using their email")
+    @PostMapping("/login")
+    public ResponseEntity<Candidate> login (@RequestBody Login login) {
+
+        Candidate candidate = candidateService.login(login.getEmail(), login.getPassword());
+        return ResponseEntity.ok(candidate);
     }
     
 

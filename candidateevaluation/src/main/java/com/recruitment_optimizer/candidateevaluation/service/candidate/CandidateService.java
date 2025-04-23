@@ -11,4 +11,6 @@ public interface CandidateService {
 
     Candidate findById(String id);
 
+    Candidate login(String email, String password);
+
 }

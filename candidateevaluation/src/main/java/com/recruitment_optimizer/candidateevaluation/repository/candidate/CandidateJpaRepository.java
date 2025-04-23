@@ -5,5 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.recruitment_optimizer.candidateevaluation.model.Candidate;
 
 public interface CandidateJpaRepository extends JpaRepository<Candidate, String> {
+
+    Candidate findByEmailAndPassword(String email, String password);
     
 }

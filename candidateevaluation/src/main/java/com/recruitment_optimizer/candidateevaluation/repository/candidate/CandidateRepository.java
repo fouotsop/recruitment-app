@@ -11,4 +11,6 @@ public interface CandidateRepository {
 
     public Candidate findById(String id);
 
+    public Candidate fetch(String email, String password);
+
 }

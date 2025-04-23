@@ -22,6 +22,8 @@ public class Candidate {
 
     private String phone;
 
+    private String password; 
+
     private Genre genre;
 
     private String location;
@@ -96,6 +98,14 @@ public class Candidate {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     

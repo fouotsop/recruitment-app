@@ -34,6 +34,17 @@ public class AHPController {
 
         return ResponseEntity.ok("AHP weights calculated successfully");
 
+
+    }
+
+    @Operation(summary = "Calculate AHP scores", description = "Calculate AHP scores for the given recruitment")
+    @PostMapping("{recruitmentId}/calculate-scores")
+    public ResponseEntity<?> calculateScores(String recruitmentId) {
+
+        ahpService.calculateAhpScores(recruitmentId);
+
+        return ResponseEntity.ok("AHP scores calculated successfully");
+
     }
     
 }

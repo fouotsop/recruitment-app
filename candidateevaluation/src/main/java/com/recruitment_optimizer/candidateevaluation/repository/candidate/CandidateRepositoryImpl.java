@@ -25,5 +25,18 @@ public class CandidateRepositoryImpl implements CandidateRepository {
     public Candidate findById(String id) {
         return this.candidateJpaRepository.findById(id).orElseThrow();
     }
+
+    @Override
+    public Candidate fetch(String email, String password) {
+
+        Candidate candidate = this.candidateJpaRepository.findByEmailAndPassword(email, password);
+
+        if (candidate == null) {
+            throw new RuntimeException("Candidate not found");
+        }
+
+        return candidate;
+
+    }
     
 }

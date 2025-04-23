@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import com.recruitment_optimizer.candidateevaluation.lib.ahp.MatrixNormalizer;
 import com.recruitment_optimizer.candidateevaluation.lib.ahp.PairwiseComparer;
 import com.recruitment_optimizer.candidateevaluation.lib.ahp.WeightCalculator;
+import com.recruitment_optimizer.candidateevaluation.model.Application;
+import com.recruitment_optimizer.candidateevaluation.model.CriterionValue;
 import com.recruitment_optimizer.candidateevaluation.model.Recruitment;
 import com.recruitment_optimizer.candidateevaluation.model.RecruitmentCriterion;
 import com.recruitment_optimizer.candidateevaluation.service.recruitment.RecruitmentService;
@@ -60,9 +62,30 @@ public class AHPServiceImpl implements AHPService {
     }
 
     @Override
+    @Transactional
     public double calculateAhpScores(String recruitmentId) {
-        // TODO Auto-generated method stub
+
+        Recruitment recruitment = recruitmentService.findById(recruitmentId);
+        
+        for (Application  application  : recruitment.getApplications()) {
+            double score = 0;
+            
+            for (RecruitmentCriterion recruitmentCriterion : recruitment.getRecruitmentCriteria()) {
+
+                for (CriterionValue  criterionValue : application.getCriteriaValues()) {
+                    if (criterionValue.getCriterion().getId().equals(recruitmentCriterion.getCriterion().getId())) {
+                        score += recruitmentCriterion.getWeight() * criterionValue.getValue();
+                    }
+                    
+                }
+            }
+
+            application.setAhpScore(score);
+            
+        }
+
+
         return 0;
     }
-    
+
 }

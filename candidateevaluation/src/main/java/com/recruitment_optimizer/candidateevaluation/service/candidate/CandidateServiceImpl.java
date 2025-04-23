@@ -29,5 +29,14 @@ public class CandidateServiceImpl implements CandidateService {
         return this.candidateRepository.findById(id);
     }
 
+
+    @Override
+    public Candidate login(String email, String password) {
+
+        Candidate candidate = candidateRepository.fetch(email, password);
+
+        return candidate;
+    }
+
     
 }

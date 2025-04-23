@@ -37,8 +37,12 @@ public class OpenApiConfig {
         final String deployUrl = "https://recruitment-app-1-4njw.onrender.com";
 
         Server devServer = new Server();
-        devServer.setUrl(deployUrl);
+        devServer.setUrl(devFullUrl);
         devServer.setDescription("Server url for development environment");
+
+        Server deployServer = new Server();
+        deployServer.setUrl(deployUrl);
+        deployServer.setDescription("Server url for production environment");
 
 
         Contact contact = new Contact();
@@ -56,6 +60,7 @@ public class OpenApiConfig {
 
         return new OpenAPI().info(info)
                 .addServersItem(devServer)
+                .addServersItem(deployServer)
                 .schemaRequirement("Bearer", securityScheme())
                 .security(securityRequirements())
                 ;

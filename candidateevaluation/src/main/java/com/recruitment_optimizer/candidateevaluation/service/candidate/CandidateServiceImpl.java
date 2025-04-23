@@ -4,17 +4,23 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import com.recruitment_optimizer.candidateevaluation.dto.model.CandidateDto;
+import com.recruitment_optimizer.candidateevaluation.mapper.candidate.CandidateMapper;
 import com.recruitment_optimizer.candidateevaluation.model.Candidate;
 import com.recruitment_optimizer.candidateevaluation.repository.candidate.CandidateRepository;
+
+import jakarta.transaction.Transactional;
 
 
 @Service
 public class CandidateServiceImpl implements CandidateService {
 
     private final CandidateRepository candidateRepository;
+    private final CandidateMapper candidateMapper;
 
-    public CandidateServiceImpl(CandidateRepository candidateRepository) {
+    public CandidateServiceImpl(CandidateMapper candidateMapper, CandidateRepository candidateRepository) {
         this.candidateRepository = candidateRepository;
+        this.candidateMapper = candidateMapper;
     }
 
 
@@ -25,8 +31,13 @@ public class CandidateServiceImpl implements CandidateService {
     }
 
     @Override
-    public Candidate findById(String id) {
-        return this.candidateRepository.findById(id);
+    @Transactional
+    public CandidateDto fetchById(String id) {
+        Candidate candidate = this.candidateRepository.fetchById(id);
+
+        CandidateDto candidateDto = candidateMapper.toDto(candidate);
+
+        return candidateDto;
     }
 
 

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.recruitment_optimizer.candidateevaluation.dto.model.CandidateDto;
 import com.recruitment_optimizer.candidateevaluation.dto.request.Login;
 import com.recruitment_optimizer.candidateevaluation.model.Candidate;
 import com.recruitment_optimizer.candidateevaluation.service.candidate.CandidateService;
@@ -39,9 +40,9 @@ public class CandidateCrontroller {
 
     @Operation(summary = "Get a candidate by ID", description = "Retrieve a candidate's details using their ID")
     @GetMapping("/{id}")
-    public ResponseEntity<Candidate> findById(@PathVariable String id) {
+    public ResponseEntity<CandidateDto> findById(@PathVariable String id) {
 
-        Candidate candidate = candidateService.findById(id);
+        CandidateDto candidate = candidateService.fetchById(id);
 
         return ResponseEntity.ok().body(candidate);
 

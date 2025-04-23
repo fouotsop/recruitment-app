@@ -22,7 +22,7 @@ public class CandidateRepositoryImpl implements CandidateRepository {
     }
 
     @Override
-    public Candidate findById(String id) {
+    public Candidate fetchById(String id) {
         return this.candidateJpaRepository.findById(id).orElseThrow();
     }
 

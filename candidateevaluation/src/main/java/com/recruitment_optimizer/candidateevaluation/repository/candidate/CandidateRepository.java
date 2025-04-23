@@ -9,7 +9,7 @@ public interface CandidateRepository {
     
     public Candidate save (Candidate candidate);
 
-    public Candidate findById(String id);
+    public Candidate fetchById(String id);
 
     public Candidate fetch(String email, String password);
 

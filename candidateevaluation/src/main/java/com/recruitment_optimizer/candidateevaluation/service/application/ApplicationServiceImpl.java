@@ -74,7 +74,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 
 
         Recruitment recruitment = recruitmentRepository.findById(create.getRecruitmentId());
-        Candidate candidate = candidateRepository.findById(create.getCandidateId()); 
+        Candidate candidate = candidateRepository.fetchById(create.getCandidateId()); 
 
         application.setRecruitment(recruitment);
         application.setCandidate(candidate);

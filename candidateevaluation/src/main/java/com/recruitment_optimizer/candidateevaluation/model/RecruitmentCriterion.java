@@ -61,7 +61,7 @@ public class RecruitmentCriterion {
 
     @JsonIgnore
     @MapsId("parentId")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     public Criterion getCriterion() {
         return criterion;
     }

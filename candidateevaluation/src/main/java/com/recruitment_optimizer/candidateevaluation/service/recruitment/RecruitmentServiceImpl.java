@@ -1,7 +1,6 @@
 package com.recruitment_optimizer.candidateevaluation.service.recruitment;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,7 +36,7 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     @Transactional
     public Recruitment create(Recruitment recruitment) {
 
-        String id = UUID.randomUUID().toString();
+        String id = recruitment.getId();
 
         List<RecruitmentCriterion> recruitmentCriteria = recruitment.getRecruitmentCriteria();
         for (RecruitmentCriterion recruitmentCriterion : recruitmentCriteria) {

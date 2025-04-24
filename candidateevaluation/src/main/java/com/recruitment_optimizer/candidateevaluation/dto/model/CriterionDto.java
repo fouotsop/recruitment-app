@@ -1,6 +1,6 @@
 package com.recruitment_optimizer.candidateevaluation.dto.model;
 
-public class CriterionDto {
+public abstract class  CriterionDto {
 
     private String id;
 
@@ -9,6 +9,8 @@ public class CriterionDto {
     private String description;
 
     private boolean mandatory;
+    
+    private String type;
 
     public CriterionDto () {}
 
@@ -42,6 +44,13 @@ public class CriterionDto {
 
     public void setMandatory(boolean mandatory) {
         this.mandatory = mandatory;
+    }
+
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
     }
 
     

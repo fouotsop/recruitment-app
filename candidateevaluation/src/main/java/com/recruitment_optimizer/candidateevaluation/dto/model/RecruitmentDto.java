@@ -2,8 +2,6 @@ package com.recruitment_optimizer.candidateevaluation.dto.model;
 
 import java.util.List;
 
-import com.recruitment_optimizer.candidateevaluation.model.RecruitmentCriterion;
-
 import jakarta.persistence.Column;
 
 public class RecruitmentDto {
@@ -22,7 +20,7 @@ public class RecruitmentDto {
 
     private boolean available;
 
-    private List<RecruitmentCriterion> recruitmentCriteria;
+    private List<RecruitmentCriterionDto> recruitmentCriteria;
 
     public RecruitmentDto () {}
 
@@ -84,11 +82,11 @@ public class RecruitmentDto {
     }
 
 
-    public List<RecruitmentCriterion> getRecruitmentCriteria() {
+    public List<RecruitmentCriterionDto> getRecruitmentCriteria() {
         return recruitmentCriteria;
     }
 
-    public void setRecruitmentCriteria(List<RecruitmentCriterion> recruitmentCriterions) {
+    public void setRecruitmentCriteria(List<RecruitmentCriterionDto> recruitmentCriterions) {
         this.recruitmentCriteria = recruitmentCriterions;
     }
 

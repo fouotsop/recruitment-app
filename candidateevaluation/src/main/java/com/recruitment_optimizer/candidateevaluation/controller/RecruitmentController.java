@@ -1,5 +1,6 @@
 package com.recruitment_optimizer.candidateevaluation.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,13 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.recruitment_optimizer.candidateevaluation.dto.model.RecruitmentCriterionDto;
 import com.recruitment_optimizer.candidateevaluation.dto.model.RecruitmentDto;
+import com.recruitment_optimizer.candidateevaluation.model.CompositeId;
 import com.recruitment_optimizer.candidateevaluation.model.Recruitment;
 import com.recruitment_optimizer.candidateevaluation.model.RecruitmentCriterion;
 import com.recruitment_optimizer.candidateevaluation.service.recruitment.RecruitmentService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.transaction.Transactional;
 
 
 
@@ -53,7 +57,19 @@ public class RecruitmentController {
         created.setNumberOfPosts(recruitment.getNumberOfPosts());
         created.setLocation(recruitment.getLocation());
         created.setSalary(recruitment.getSalary());
-        created.setRecruitmentCriteria(recruitment.getRecruitmentCriteria());
+
+        List<RecruitmentCriterion> recruitmentCriteria = new ArrayList<>();  
+
+        for (RecruitmentCriterionDto dto : recruitment.getRecruitmentCriteria()) {
+            RecruitmentCriterion recruitmentCriterion = new RecruitmentCriterion();
+            recruitmentCriterion.setId(new CompositeId());
+            recruitmentCriterion.getId().setChildId(dto.getRecruitmentId());
+            recruitmentCriterion.getId().setParentId(dto.getRecruitmentId());
+            recruitmentCriterion.setPreference(dto.getPreference());
+            recruitmentCriteria.add(recruitmentCriterion);
+            
+        }
+        created.setRecruitmentCriteria(recruitmentCriteria);
 
         created = service.create(created);
 
@@ -64,6 +80,7 @@ public class RecruitmentController {
 
     @Operation(summary = "Fetch recruitment by ID", description = "Fetch recruitment details by ID")
     @GetMapping("/{id}")
+    @Transactional
     public ResponseEntity<RecruitmentDto> fetchById(@PathVariable("id") String id) {
 
 

@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
@@ -78,6 +79,11 @@ public abstract class Criterion {
 
     public void setRecruitmentCriteria(List<RecruitmentCriterion> recruitmentCriteria) {
         this.recruitmentCriteria = recruitmentCriteria;
+    }
+
+    @Transient
+    public String getType() {
+        return this.getClass().getSimpleName();
     }
     
 

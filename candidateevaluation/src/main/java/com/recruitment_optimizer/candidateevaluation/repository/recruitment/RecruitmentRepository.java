@@ -1,5 +1,7 @@
 package com.recruitment_optimizer.candidateevaluation.repository.recruitment;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -16,6 +18,8 @@ public interface RecruitmentRepository {
     public Page<Recruitment> findAll(Pageable pageable);
 
     public Recruitment fetcchById(String id);
+
+    public List<Recruitment> findAll();
 
 
 }

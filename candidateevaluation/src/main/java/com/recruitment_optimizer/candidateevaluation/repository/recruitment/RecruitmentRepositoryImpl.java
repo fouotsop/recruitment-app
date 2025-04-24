@@ -1,5 +1,7 @@
 package com.recruitment_optimizer.candidateevaluation.repository.recruitment;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -41,6 +43,12 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
         }
 
         return recruitment;
+    }
+
+
+    @Override
+    public List<Recruitment> findAll() {
+        return recruitmentJpaRepository.findAll();
     }
 
 

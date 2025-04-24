@@ -45,15 +45,26 @@ public class RecruitmentMapperImpl implements RecruitmentMapper {
                                                 }
 
                                                 @Override
+                                                public String getDescription() {
+                                                    return criterion.getDescription();
+                                                }
+
+                                                @Override
+                                                public boolean isMandatory() {
+                                                    return criterion.isMandatory();
+                                                }
+
+                                                @Override
                                                 public String getType(){
                                                     return criterion.getType();
                                                 }
-
+                                                
                                             };
 
                     recruitmentCriterionDto.setCriterion(criterionDto);
                     recruitmentCriterionDto.setRecruitmentId(recruitment.getId());
                     recruitmentCriterionDto.setPreference(recruitmentCriterion.getPreference());
+                    recruitmentCriterionDto.setThreshold(recruitmentCriterion.getThreshold());
                     return recruitmentCriterionDto;
                 })
                 .toList();

@@ -66,6 +66,7 @@ public class RecruitmentController {
             recruitmentCriterion.getId().setChildId(dto.getRecruitmentId());
             recruitmentCriterion.getId().setParentId(dto.getRecruitmentId());
             recruitmentCriterion.setPreference(dto.getPreference());
+            recruitmentCriterion.setThreshold(dto.getThreshold());
             recruitmentCriteria.add(recruitmentCriterion);
             
         }
@@ -97,6 +98,16 @@ public class RecruitmentController {
         
         return ResponseEntity.ok().body(recruitment);
     }
+
+    @Operation(summary = "Get all recruitments", description = "return all the recruitments")
+    @GetMapping("")
+    public ResponseEntity<List<Recruitment>> findAll() {
+        List<Recruitment> recruitments = service.findAll();
+        
+        return ResponseEntity.ok().body(recruitments);
+    }
+
+
 
     @GetMapping("/search")
     public ResponseEntity<Page<Recruitment>> search (

@@ -6,6 +6,8 @@ public class RecruitmentCriterionDto {
 
     private Double preference;
 
+    private Double threshold;
+
     private CriterionDto criterion;
 
     public RecruitmentCriterionDto () {}
@@ -34,10 +36,13 @@ public class RecruitmentCriterionDto {
         this.preference = preference;
     }
 
+    public Double getThreshold() {
+        return threshold;
+    }
 
-    
-
-    
+    public void setThreshold(Double threshold) {
+        this.threshold = threshold;
+    }
 
 
 }

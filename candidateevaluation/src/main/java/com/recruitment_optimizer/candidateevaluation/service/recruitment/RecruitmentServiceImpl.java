@@ -102,4 +102,9 @@ public class RecruitmentServiceImpl implements RecruitmentService {
 
     }
 
+    @Override
+    public List<Recruitment> findAll() {
+        return recruitmentRepository.findAll();
+    }
+
 }

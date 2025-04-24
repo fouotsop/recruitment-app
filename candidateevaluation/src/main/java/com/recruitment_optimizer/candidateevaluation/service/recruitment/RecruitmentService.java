@@ -25,5 +25,7 @@ public interface RecruitmentService {
 
     public Recruitment addCriterion(String id, List<RecruitmentCriterion> criteria);
 
+    public List<Recruitment> findAll();
+
 
 }

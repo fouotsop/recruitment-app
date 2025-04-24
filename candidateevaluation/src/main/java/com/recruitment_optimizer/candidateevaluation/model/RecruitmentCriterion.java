@@ -15,6 +15,8 @@ public class RecruitmentCriterion {
 
     private Double preference;
 
+    private Double threshold;
+
     private Double weight;
 
     private Recruitment recruitment;
@@ -68,6 +70,14 @@ public class RecruitmentCriterion {
 
     public void setCriterion(Criterion criterion) {
         this.criterion = criterion;
+    }
+
+    public Double getThreshold() {
+        return threshold;
+    }
+
+    public void setThreshold(Double threshold) {
+        this.threshold = threshold;
     }
 
     

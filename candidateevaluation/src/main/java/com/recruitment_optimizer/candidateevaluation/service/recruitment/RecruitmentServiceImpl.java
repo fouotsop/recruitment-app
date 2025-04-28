@@ -44,6 +44,7 @@ public class RecruitmentServiceImpl implements RecruitmentService {
         }
 
         recruitment.setRecruitmentCriteria(null);
+        recruitment.setId(id);
         recruitment = recruitmentRepository.save(recruitment);
 
         for (RecruitmentCriterion recruitmentCriterion : recruitmentCriteria) {

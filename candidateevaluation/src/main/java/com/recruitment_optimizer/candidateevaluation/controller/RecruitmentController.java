@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.recruitment_optimizer.candidateevaluation.dto.model.RecruitmentCriterionDto;
+import com.recruitment_optimizer.candidateevaluation.dto.model.RecruitmentCriterionDtoC;
 import com.recruitment_optimizer.candidateevaluation.dto.model.RecruitmentDto;
+import com.recruitment_optimizer.candidateevaluation.dto.request.CreateRecruitment;
 import com.recruitment_optimizer.candidateevaluation.model.CompositeId;
 import com.recruitment_optimizer.candidateevaluation.model.Recruitment;
 import com.recruitment_optimizer.candidateevaluation.model.RecruitmentCriterion;
@@ -45,7 +46,7 @@ public class RecruitmentController {
 
     @Operation(summary = "Create a new recruitment", description = "Create a new recruitment with the provided details")
     @PostMapping("")
-    public ResponseEntity<Recruitment> create(@RequestBody RecruitmentDto recruitment) {
+    public ResponseEntity<Recruitment> create(@RequestBody CreateRecruitment recruitment) {
         
         String id = UUID.randomUUID().toString();
 
@@ -60,11 +61,11 @@ public class RecruitmentController {
 
         List<RecruitmentCriterion> recruitmentCriteria = new ArrayList<>();  
 
-        for (RecruitmentCriterionDto dto : recruitment.getRecruitmentCriteria()) {
+        for (RecruitmentCriterionDtoC dto : recruitment.getRecruitmentCriteria()) {
             RecruitmentCriterion recruitmentCriterion = new RecruitmentCriterion();
             recruitmentCriterion.setId(new CompositeId());
             recruitmentCriterion.getId().setChildId(dto.getRecruitmentId());
-            recruitmentCriterion.getId().setParentId(dto.getRecruitmentId());
+            recruitmentCriterion.getId().setParentId(dto.getCriterionId());
             recruitmentCriterion.setPreference(dto.getPreference());
             recruitmentCriterion.setThreshold(dto.getThreshold());
             recruitmentCriteria.add(recruitmentCriterion);

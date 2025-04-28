@@ -1,6 +1,6 @@
 package com.recruitment_optimizer.candidateevaluation.dto.model;
 
-public abstract class  CriterionDto {
+public class  CriterionDto {
 
     private String id;
 

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.recruitment_optimizer.candidateevaluation.dto.model.RecruitmentCriterionDtoC;
 import com.recruitment_optimizer.candidateevaluation.dto.model.RecruitmentDto;
+import com.recruitment_optimizer.candidateevaluation.dto.request.AddRecruitmentCriterion;
 import com.recruitment_optimizer.candidateevaluation.dto.request.CreateRecruitment;
 import com.recruitment_optimizer.candidateevaluation.model.CompositeId;
 import com.recruitment_optimizer.candidateevaluation.model.Recruitment;
@@ -126,8 +127,21 @@ public class RecruitmentController {
 
     @Operation(summary = "Add a criterion to a recruitment", description = "Add a criterion to a recruitment")  
     @PostMapping("/{id}/criteria")
-    public ResponseEntity<?> addCriterion(@PathVariable String id, @RequestBody List<RecruitmentCriterion> criteria) {
-        Recruitment recruitment = service.addCriterion(id, criteria);
+    public ResponseEntity<?> addCriterion(@PathVariable String id, @RequestBody List<AddRecruitmentCriterion> criteria) {
+
+        List<RecruitmentCriterion> recruitmentCriteria = new ArrayList<>();
+        for (AddRecruitmentCriterion  add  : criteria) {
+            RecruitmentCriterion recruitmentCriterion = new RecruitmentCriterion();
+            recruitmentCriterion.setId(new CompositeId());
+            recruitmentCriterion.getId().setChildId(id);
+            recruitmentCriterion.getId().setParentId(add.getCriterionId());
+            recruitmentCriterion.setPreference(add.getPreference());
+            recruitmentCriterion.setThreshold(add.getThreshold());
+            recruitmentCriteria.add(recruitmentCriterion);
+            
+        }
+
+        Recruitment recruitment = service.addCriterion(id, recruitmentCriteria);
         return ResponseEntity.ok().body(recruitment);
     }
 

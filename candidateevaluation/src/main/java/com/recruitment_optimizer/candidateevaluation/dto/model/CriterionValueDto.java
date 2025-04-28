@@ -8,7 +8,7 @@ public class CriterionValueDto {
 
     private String criterionId;
 
-    private String value;
+    private double value;
 
     public CriterionValueDto() {}
 
@@ -36,11 +36,11 @@ public class CriterionValueDto {
         this.criterionId = criterionId;
     }
 
-    public String getValue() {
+    public double  getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(double value) {
         this.value = value;
     }
 

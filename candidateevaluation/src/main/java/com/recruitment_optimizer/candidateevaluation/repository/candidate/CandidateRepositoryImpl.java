@@ -1,8 +1,12 @@
 package com.recruitment_optimizer.candidateevaluation.repository.candidate;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.recruitment_optimizer.candidateevaluation.model.Candidate;
+
+import jakarta.transaction.Transactional;
 
 
 @Repository
@@ -37,6 +41,22 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 
         return candidate;
 
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return this.candidateJpaRepository.existsByEmail(email);
+    }
+
+    @Override
+    public Candidate findByEmail(String email) {
+        return this.candidateJpaRepository.findByEmail(email);
+    }
+
+    @Override
+    @Transactional  
+    public List<Candidate> fetchByRecruitmentId(String id) {
+        return this.candidateJpaRepository.findCandidatesByRecruitment(id);
     }
     
 }

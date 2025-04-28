@@ -1,5 +1,6 @@
 package com.recruitment_optimizer.candidateevaluation.service.candidate;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -26,7 +27,16 @@ public class CandidateServiceImpl implements CandidateService {
 
     @Override
     public Candidate create(Candidate candidate) {
+
+        boolean exists = candidateRepository.existsByEmail(candidate.getEmail());
+        if (exists) {
+            Candidate existingCandidate = candidateRepository.findByEmail(candidate.getEmail());
+
+            return existingCandidate;
+        }
+
         candidate.setId(UUID.randomUUID().toString());
+
         return candidateRepository.save(candidate);
     }
 
@@ -47,6 +57,17 @@ public class CandidateServiceImpl implements CandidateService {
         Candidate candidate = candidateRepository.fetch(email, password);
 
         return candidate;
+    }
+
+
+    @Override
+    @Transactional
+    public List<Candidate> fetchByRecruitmentId(String id) {
+
+        List<Candidate> candidates = candidateRepository.fetchByRecruitmentId(id);
+
+        return candidates;   
+
     }
 
     

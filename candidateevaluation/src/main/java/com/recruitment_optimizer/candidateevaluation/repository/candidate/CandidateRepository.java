@@ -1,5 +1,7 @@
 package com.recruitment_optimizer.candidateevaluation.repository.candidate;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.recruitment_optimizer.candidateevaluation.model.Candidate;
@@ -13,4 +15,9 @@ public interface CandidateRepository {
 
     public Candidate fetch(String email, String password);
 
+    public boolean existsByEmail(String email);
+
+    public Candidate findByEmail(String email);
+
+    public List<Candidate> fetchByRecruitmentId(String id);
 }

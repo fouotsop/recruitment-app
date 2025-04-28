@@ -1,5 +1,7 @@
 package com.recruitment_optimizer.candidateevaluation.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,6 +45,16 @@ public class CandidateCrontroller {
     public ResponseEntity<CandidateDto> findById(@PathVariable String id) {
 
         CandidateDto candidate = candidateService.fetchById(id);
+
+        return ResponseEntity.ok().body(candidate);
+
+    }
+
+    @Operation(summary = "Find by recruitment id", description = "Retrieve a candidate's details using their recruitment ID")
+    @GetMapping("/recruitment/{id}")
+    public ResponseEntity<List<Candidate>> findByRecruitmentId(@PathVariable String id) {
+
+        List<Candidate> candidate = candidateService.fetchByRecruitmentId(id);
 
         return ResponseEntity.ok().body(candidate);
 

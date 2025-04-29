@@ -20,4 +20,6 @@ public interface CandidateRepository {
     public Candidate findByEmail(String email);
 
     public List<Candidate> fetchByRecruitmentId(String id);
+
+    public Candidate findById(String id);
 }

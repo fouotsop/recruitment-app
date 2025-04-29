@@ -70,5 +70,11 @@ public class CandidateServiceImpl implements CandidateService {
 
     }
 
+
+    @Override
+    public Candidate findById(String id) {
+        return this.candidateRepository.findById(id);
+    }
+
     
 }

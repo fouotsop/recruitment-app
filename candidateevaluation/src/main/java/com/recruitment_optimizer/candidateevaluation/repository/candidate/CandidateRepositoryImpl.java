@@ -58,5 +58,10 @@ public class CandidateRepositoryImpl implements CandidateRepository {
     public List<Candidate> fetchByRecruitmentId(String id) {
         return this.candidateJpaRepository.findCandidatesByRecruitment(id);
     }
+
+    @Override
+    public Candidate findById(String id) {
+        return this.candidateJpaRepository.findById(id).orElseThrow();
+    }
     
 }

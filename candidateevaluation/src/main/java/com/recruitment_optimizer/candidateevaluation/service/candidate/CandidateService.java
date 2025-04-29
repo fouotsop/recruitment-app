@@ -18,5 +18,5 @@ public interface CandidateService {
 
     List<Candidate> fetchByRecruitmentId(String id);
 
-
+    Candidate findById(String id);
 }

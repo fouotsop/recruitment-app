@@ -1,6 +1,7 @@
 package com.recruitment_optimizer.candidateevaluation.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,7 +44,7 @@ public class AHPController {
 
     @Operation(summary = "Recruit the best team for a job offer", description = "Returns the best team (candidate ids) for a job offer with GA related metrics")
     @PostMapping("{recruitmentId}/optimize")
-    public ResponseEntity<?> getBestTeam(String recruitmentId) {
+    public ResponseEntity<?> getBestTeam(@PathVariable String recruitmentId) {
 
         ahpService.calculateAHPWeight(recruitmentId);
 

@@ -52,7 +52,7 @@ public class AHPController {
 
         ResponseEntity<?> response = gaClient.recruit(recruitmentId);
 
-        return response;
+        return ResponseEntity.ok().body(response.getBody());
     }
     
     /*@Operation(summary = "Recruit the best team for a job offer", description = "Returns the best team for a job offer")
